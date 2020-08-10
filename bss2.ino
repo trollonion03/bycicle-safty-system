@@ -1,30 +1,34 @@
 #include <SoftwareSerial.h> // 0,1번핀 제외하고 Serial 통신을 하기 위해 선언
 char command = 0;
 bool action = false;
-int Trg = 8;
+int Trg = 8; //초음파센서(중앙)
 int Ech = 9;
-long Duration = 0;
+long Duration = 0; //정수로 정의(딱히 상관 없을거 같기도 하지만 상관있음)
 long Distance = 0;
 long Durationl = 0;
 long Distancel = 0;
 long Durationr = 0;
 long Distancer = 0;
-int Trgl = 4;
+int Trgl = 4; //초음파센서(좌측)
 int Echl = 5;
-int Trgr = 7;
+int Trgr = 7; //초음파센서(우측)
 int Echr = 6;
-SoftwareSerial mySerial(2, 3); // HC-06 TX=2번핀 , RX=3번핀 연결
+SoftwareSerial mySerial(2, 3); // HC-06 TX=2번핀 , RX=3번핀 연결 hc-06
 
 void setup() {
   Serial.begin(9600);
-  pinMode(Trg, OUTPUT);
+  pinMode(Trg, OUTPUT); //ㅋㅋㅋㅋㅋㅋㅋㅋㅋ 하나만해놨네. 이러니까 대회장소가서 문제생기지
   pinMode(Ech, INPUT);
+  pinMode(Trgl, OUTPUT); //깃허브 정리하다 수정함
+  pinMode(Echl, INPUT);
+  pinMode(Trgr, OUTPUT);
+  pinMode(Echr, INPUT);
   mySerial.begin(9600);
 
 }
 
 void loop() {
-  action = true; 
+  action = true; //작동 시작
   if (mySerial.available() > 0)
   {
     command = mySerial.read();
@@ -33,7 +37,7 @@ void loop() {
     //if (Serial.available())
     
     
-    action = true;
+    action = true; //개발과정에서의 테스트코드 && action = ture 시 센서 동작, 블루투스 통신 함수 
     if (command == '0'){
 
       action = false;
@@ -58,12 +62,12 @@ void loop() {
 //    else
 //    {
       //Serial.println("running");
-      hc_sr04();
-      hc_sr04l();
-      hc_sr04r();
-      sendbtserial();
+      hc_sr04(); //개발 과정에서 사용한 센서가 hc_sr04여서 함수 이름을 이와 같이 지정
+      hc_sr04l(); //좌측센서
+      hc_sr04r(); //우측센서
+      sendbtserial(); //HC-06 BT Serial 통신
     }
-    delay(1000);
+    delay(1000); //1초마다 한번씩(이렇게 안하면 앱에서 못받아들임)
     
 
 
@@ -72,7 +76,7 @@ void loop() {
 
 }
 
-void hc_sr04()
+void hc_sr04() //거리별로 값을 다르게 하려고 하였으나, 시간 문제로 제외
 {
   digitalWrite(Trg, LOW);
   delayMicroseconds(2);
@@ -80,7 +84,7 @@ void hc_sr04()
   digitalWrite(Trg, LOW);
 
   Duration = pulseIn(Ech, HIGH);
-  Distance = (Duration/2.9)/2;
+  Distance = (Duration/2.9)/2; //거리 = (시간/2.9)/2
   //Serial.print("Duration = ");
   //Serial.println(Duration);
   Serial.print("F");
@@ -106,7 +110,7 @@ void hc_sr04()
 }
 
 
-void hc_sr04l()
+void hc_sr04l() //좌측센서
 {
   digitalWrite(Trgl, LOW);
   delayMicroseconds(2);
@@ -139,7 +143,7 @@ void hc_sr04l()
   }*/
 }
 
-void hc_sr04r()
+void hc_sr04r() //우측센서
 {
   digitalWrite(Trgr, LOW);
   delayMicroseconds(2);
@@ -206,4 +210,4 @@ void sendbtserial() //데이터전송 - 앱에서 값을 받을때 혼선되지 
   {
     mySerial.println("0");
   }
-}
+} //2020-08-11 수정
