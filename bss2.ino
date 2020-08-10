@@ -172,37 +172,37 @@ void hc_sr04r()
   }*/
 }
 
-void sendbtserial()
+void sendbtserial() //데이터전송 - 앱에서 값을 받을때 혼선되지 않도록 전송 텍스트 간략화.
 {
-  if((Distance == 1) && (Distancer == 0) && (Distancel == 0))
+  if((Distance == 1) && (Distancer == 0) && (Distancel == 0)) // 중간 1, 우측 0, 좌측 0
   {
     mySerial.println("1");
   }
-  else if((Distance == 0) && (Distancer == 1) && (Distancel == 0))
+  else if((Distance == 0) && (Distancer == 1) && (Distancel == 0)) // 중간 0, 우측 1, 좌축 0
   {
     mySerial.println("2");
   }
-  else if((Distance == 0) && (Distancer == 0) && (Distancel == 1))
+  else if((Distance == 0) && (Distancer == 0) && (Distancel == 1)) // 중간 0, 우측 0, 좌측 1
   {
     mySerial.println("3");
   }
-  else if((Distance == 1) && (Distancer == 1) && (Distancel == 0))
+  else if((Distance == 1) && (Distancer == 1) && (Distancel == 0)) // 중간 1, 우측 1, 좌측 0
   {
     mySerial.println("4");
   }
-  else if((Distance == 1) && (Distancer == 0) && (Distancel == 1))
+  else if((Distance == 1) && (Distancer == 0) && (Distancel == 1)) // 중간 1, 우측 0, 좌측 1
   {
     mySerial.println("5");
   }
-  else if((Distance == 0) && (Distancer == 1) && (Distancel == 1))
+  else if((Distance == 0) && (Distancer == 1) && (Distancel == 1)) // 중간 0, 우측 1, 좌측 1
   {
     mySerial.println("6");
   }
-  else if((Distance == 1) && (Distancer == 1) && (Distancel == 1))
+  else if((Distance == 1) && (Distancer == 1) && (Distancel == 1)) // 전체 동시 감지
   {
     mySerial.println("7");
   }
-  else
+  else //감지 X
   {
     mySerial.println("0");
   }
