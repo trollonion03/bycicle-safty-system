@@ -90,22 +90,22 @@ void hc_sr04() //거리별로 값을 다르게 하려고 하였으나, 시간 �
   Serial.print("F");
   Serial.println(Distance); 
   //mySerial.print("F");
-  //mySerial.println(Distance);
+  //mySerial.println(Distance); //개발테스트용
   /*if((Distance > 5000) && (Distance <= 7000))
   {
-    mySerial.println("F");
-    mySerial.println("1");
+    mySerial.println("F");//전면
+    mySerial.println("1");//1
     //mySerial.println(Distance);
   }
   else if(Distance <= 5000)
   {
     mySerial.println("F");
-    mySerial.println("2");
+    mySerial.println("2");//2
   }
   else
   {
     mySerial.println("F");
-    mySerial.println("0");
+    mySerial.println("0");//감지 X
   }*/
 }
 
@@ -124,7 +124,7 @@ void hc_sr04l() //좌측센서
   Serial.println("L");
   Serial.println(Distancel); 
   //mySerial.print("F");
-  //mySerial.println(Distance);
+  //mySerial.println(Distance);//개발 테스트용
   /*if((Distancel > 5000) && (Distance <= 7000))
   {
     mySerial.println("L");
@@ -156,7 +156,7 @@ void hc_sr04r() //우측센서
   //Serial.println(Duration);
   Serial.println("R");
   Serial.println(Distancer); 
-  //mySerial.print("F");
+  //mySerial.print("F"); //개발 테스트용
   //mySerial.println(Distance);
   /*if((Distancer > 5000) && (Distancer <= 7000))
   {
@@ -210,4 +210,4 @@ void sendbtserial() //데이터전송 - 앱에서 값을 받을때 혼선되지 
   {
     mySerial.println("0");
   }
-} //2020-08-11 수정
+} //2020-08-12 수정
